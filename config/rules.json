@@ -1,0 +1,18 @@
+{
+  "bruteforce": {
+    "fail_threshold": 5,
+    "time_window_seconds": 60
+  },
+  "password_spraying": {
+    "user_threshold": 3,
+    "time_window_seconds": 120
+  },
+  "credential_stuffing": {
+    "fail_threshold": 8,
+    "success_threshold": 1,
+    "time_window_seconds": 300
+  },
+  "anomaly_detection": {
+    "std_dev_multiplier": 3
+  }
+}

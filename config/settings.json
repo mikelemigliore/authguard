@@ -1,0 +1,7 @@
+{
+  "use_s3": true,
+  "log_bucket": "authguard-michele-logs",
+  "log_key": "sample.log",
+  "output_bucket": "authguard-michele-logs",
+  "region": "us-east-2"
+}
