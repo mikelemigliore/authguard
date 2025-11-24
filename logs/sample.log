@@ -1,3 +1,4 @@
+# Brute Force
 {"timestamp": "2025-01-01T12:00:00", "ip": "192.168.1.10", "user": "alice", "status": "FAIL"}
 {"timestamp": "2025-01-01T12:00:05", "ip": "192.168.1.10", "user": "alice", "status": "FAIL"}
 {"timestamp": "2025-01-01T12:00:10", "ip": "192.168.1.10", "user": "alice", "status": "FAIL"}
@@ -5,6 +6,16 @@
 {"timestamp": "2025-01-01T12:00:20", "ip": "192.168.1.10", "user": "alice", "status": "FAIL"}
 {"timestamp": "2025-01-01T12:00:22", "ip": "192.168.1.10", "user": "alice", "status": "SUCCESS"}
 
+# Password Spraying
 {"timestamp": "2025-01-01T12:05:00", "ip": "10.0.0.5", "user": "bob", "status": "FAIL"}
 {"timestamp": "2025-01-01T12:05:10", "ip": "10.0.0.5", "user": "charlie", "status": "FAIL"}
 {"timestamp": "2025-01-01T12:05:15", "ip": "10.0.0.5", "user": "david", "status": "FAIL"}
+
+# Credential Stuffing Pattern
+{"timestamp": "2025-01-01T12:10:00", "ip": "8.8.8.8", "user": "mike", "status": "FAIL"}
+{"timestamp": "2025-01-01T12:10:05", "ip": "8.8.8.8", "user": "mike", "status": "FAIL"}
+{"timestamp": "2025-01-01T12:10:07", "ip": "8.8.8.8", "user": "mike", "status": "FAIL"}
+{"timestamp": "2025-01-01T12:10:09", "ip": "8.8.8.8", "user": "mike", "status": "SUCCESS"}
+
+# Anomaly Pattern
+{"timestamp": "2025-01-03T00:00:00", "ip": "123.123.123.123", "user": "weird", "status": "FAIL"}
