@@ -1,4 +1,3 @@
-# src/ai_assistant.py
 
 import json
 import os

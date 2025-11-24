@@ -1,4 +1,3 @@
-# src/parser.py
 
 import json
 from dataclasses import dataclass
@@ -11,7 +10,7 @@ class LogEntry:
   timestamp: datetime
   ip: str
   user: str
-  status: str  # "FAIL" or "SUCCESS"
+  status: str 
 
 
 def parse_log_line(line: str) -> LogEntry | None:
@@ -33,7 +32,6 @@ def parse_log_line(line: str) -> LogEntry | None:
       status=data["status"].upper()
     )
   except (json.JSONDecodeError, KeyError, ValueError):
-    # In a real system you'd log this; here we just skip bad lines.
     return None
 
 
@@ -49,6 +47,5 @@ def load_logs(path: str) -> List[LogEntry]:
       if entry is not None:
         entries.append(entry)
 
-  # Sort by time, just in case the file isn't already ordered
   entries.sort(key=lambda e: e.timestamp)
   return entries

@@ -1,4 +1,3 @@
-# src/detector.py
 
 import json
 from collections import defaultdict, deque
@@ -18,7 +17,6 @@ def detect_bruteforce(entries: List[LogEntry], rules: Dict[str, Any]) -> List[Di
     threshold = rules["bruteforce"]["fail_threshold"]
     window = timedelta(seconds=rules["bruteforce"]["time_window_seconds"])
 
-    # Track failed attempts per IP using a sliding window
     attempts: Dict[str, deque] = defaultdict(deque)
 
     for entry in entries:
@@ -27,11 +25,9 @@ def detect_bruteforce(entries: List[LogEntry], rules: Dict[str, Any]) -> List[Di
 
         attempts[entry.ip].append(entry.timestamp)
 
-        # Remove timestamps older than the sliding window
         while attempts[entry.ip] and (entry.timestamp - attempts[entry.ip][0]) > window:
             attempts[entry.ip].popleft()
 
-        # If threshold exceeded → alert
         if len(attempts[entry.ip]) >= threshold:
             alerts.append({
                 "type": "bruteforce",
@@ -51,7 +47,6 @@ def detect_password_spraying(entries: List[LogEntry], rules: Dict[str, Any]) -> 
     window = timedelta(seconds=rules["password_spraying"]["time_window_seconds"])
     user_threshold = rules["password_spraying"]["user_threshold"]
 
-    # Track different usernames targeted by each IP
     attempts: Dict[str, deque] = defaultdict(deque)
 
     for entry in entries:
@@ -60,11 +55,9 @@ def detect_password_spraying(entries: List[LogEntry], rules: Dict[str, Any]) -> 
 
         attempts[entry.ip].append((entry.timestamp, entry.user))
 
-        # Remove outdated attempts
         while attempts[entry.ip] and (entry.timestamp - attempts[entry.ip][0][0]) > window:
             attempts[entry.ip].popleft()
 
-        # Count unique usernames in the window
         unique_users = {user for (_, user) in attempts[entry.ip]}
 
         if len(unique_users) >= user_threshold:
@@ -88,13 +81,11 @@ def detect_credential_stuffing(entries: List[LogEntry], rules: Dict[str, Any]) -
     success_threshold = rules["credential_stuffing"]["success_threshold"]
     window = timedelta(seconds=rules["credential_stuffing"]["time_window_seconds"])
 
-    # Track per-IP failures & successes
     events: Dict[str, deque] = defaultdict(deque)
 
     for entry in entries:
         events[entry.ip].append((entry.timestamp, entry.status))
 
-        # Remove old events
         while events[entry.ip] and (entry.timestamp - events[entry.ip][0][0]) > window:
             events[entry.ip].popleft()
 
